@@ -23,7 +23,7 @@ app.use(cookieParser('Inigo'))
 app.use(session({secret: 'free'}))
 
 // import api routes
-app.use('/api',api)
+app.use('/api', api)
 
 // 导入和设置nuxt.js options
 let config = require('../nuxt.config.js')
@@ -33,14 +33,13 @@ config.dev = !(process.env.NODE_ENV === 'production')
 const nuxt = new Nuxt(config)
 
 if (!config.dev) {
-    const builder = new Builder(nuxt)
-    builder.build()
+  const builder = new Builder(nuxt)
+  builder.build()
 }
-
 
 // 给express模块赋予中间件
 app.use(nuxt.render)
 
 // 端口监听
-app.listen(port,host)
+app.listen(port, host)
 console.log(`server listening on ${port} ${host}`)

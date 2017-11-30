@@ -36,13 +36,13 @@
       </el-table>
       <div class="pagination-container" v-show="!listLoading">
         <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :page-sizes="[10,15,20,30]"
-        :page-size="articleListQuery.limit"
-        :currentPage.sync="articleListQuery.currentPage"
-        layout="total, sizes, prev, pager, next, jumper">
-        :total="4"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="articleListQuery.currentPage"
+          :page-sizes="[10, 15, 20, 30]"
+          :page-size="articleListQuery.limit"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="totalNum">
         </el-pagination>
       </div>
     </div>
@@ -59,8 +59,9 @@
           currentPage: 1,
           limit: 10
         },
-        listLoading: false,
-        articleList: null
+        listLoading: true,
+        articleList: null,
+        totalNum: 0
       }
     },
     mounted () {
@@ -74,7 +75,7 @@
         this.listLoading = true
         let {data: result} = await axios.post('/api/admin/article', params)
         this.articleList = result.result
-        console.log(JSON.stringify(result.result))
+        this.totalNum = result.totalNum
         this.listLoading = false
       },
       handleSizeChange (val) {

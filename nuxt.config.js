@@ -47,12 +47,31 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    /*
+    ** loader处理
+    */
+    loaders: [
+      {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
+        include: [`${process.cwd()}/assets/icons/svg`],
+        options: {
+          symbolId: 'icon-[name]'
+        }
+      }
+    ]
   },
   /*
   ** 插件引入
   */
   plugins: [
     { src: '~/plugins/element-ui.js', ssr: true}
-  ]
+  ],
+  /*
+  ** 访问地址
+  */
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+  }
 }

@@ -1,6 +1,7 @@
 <template>
   <div>
     <SlideMenu></SlideMenu>
+
   </div>
 </template>
 <script>

@@ -28,6 +28,8 @@
     "nodemailer": "^4.4.0",
     "nuxt": "^1.0.0-rc11",
     "sha1": "^1.1.1",
+    "svg-sprite-loader": "^3.4.1",
+    "vue-quill-editor": "^3.0.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

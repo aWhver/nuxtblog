@@ -15,6 +15,12 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill {
   background-color: rgba(255,255,255,0) !important;
   color: #fff !important;
 }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 100%;
+  background: #eee;
+}
+::-webkit-scrollbar-thumb { background: #a0a0a0;border-radius: 5px;}
 .main-container {
   margin-left: 180px;
 }
@@ -24,3 +30,31 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill {
 .pagination-container {
   padding: 15px;
 }
+.pagination-container .el-pager li.active {
+  color: #fff;
+  background: #266cb4;
+}
+.pagination-container .el-pager li:hover, .pagination-container .el-pagination button:hover  {
+  background: #266cb4;
+  color: #ffffff;
+}
+.pagination-container .el-pager li {
+  background: #6aabef;
+  color: #fff;
+  margin: 0 4px;
+  padding: 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.pagination-container .el-pagination button {
+  background: #6aabef;
+  color: #ffffff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding-left: 6px;
+}
+.pagination-container .el-pagination button.disabled { background-color: #6aabef; color: #ffffff;}
+.pagination-container .el-pager li.btn-quicknext, .el-pager li.btn-quickprev { color: #ffffff;}
+
