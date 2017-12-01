@@ -2,6 +2,16 @@
   <div>
     <SlideMenu></SlideMenu>
     <div class="main-container">
+      <div class="filter-container">
+        <div class="filter-item">
+          <el-select v-model="value" placeholder="按ID升序排列" @change="sortId()">
+            <el-option v-for="item in options" :label="item.label" :key="item.value" :value="item.value"></el-option>
+          </el-select>
+        </div>
+        <div class="filter-item">
+          <el-button type="primary" icon="el-icon-edit">新增</el-button>
+        </div>
+      </div>
       <el-table :data="articleList" v-loading="listLoading" element-loading-text="拼命加载中......" border fit empty-text="暂无数据" style="width: 100%">
         <el-table-column type="index" align="center" label="序号">
           <template scope="scope">
@@ -61,7 +71,18 @@
         },
         listLoading: true,
         articleList: null,
-        totalNum: 0
+        totalNum: 0,
+        value: '按ID升序排列',
+        options: [
+          {
+            value: 'asc',
+            label: '按ID升序排列'
+          },
+          {
+            value: 'desc',
+            label: '按ID降序排列'
+          }
+        ]
       }
     },
     mounted () {
@@ -91,6 +112,21 @@
           limit: this.articleListQuery.limit,
           currentPage: val
         })
+      },
+      sortId () {
+        if (this.articleList === null) {
+          return
+        }
+        if (this.value === 'desc') {
+          this.articleList.sort((articleObj1, articleObj2) => {
+            return articleObj2.id - articleObj1.id
+          })
+        }
+        if (this.value === 'asc') {
+          this.articleList.sort((articleObj1, articleObj2) => {
+            return articleObj1.id - articleObj2.id
+          })
+        }
       }
     },
     components: {
@@ -106,5 +142,10 @@
   .el-table .cell span.title {
     cursor: pointer;
     color: #337ab7;
+  }
+  .filter-container { margin: 10px 0;}
+  .filter-container .filter-item { display: inline-block; margin: 0 4px;}
+  .filter-container .el-select input {
+    width: 140px;
   }
 </style>

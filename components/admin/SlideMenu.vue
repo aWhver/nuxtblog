@@ -5,8 +5,8 @@
       class="el-menu-vertical-demo">
       <el-menu-item index="/admin/info">
         <nuxt-link to="/admin/info">
-          <!--<i class="el-icon-location"></i>-->
-          <svg-icon></svg-icon>
+          <i class="el-icon-location"></i>
+          <!--<svg-icon></svg-icon>-->
           <span slot="title">个人信息</span>
         </nuxt-link>
       </el-menu-item>
