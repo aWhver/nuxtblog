@@ -67,7 +67,8 @@
       return {
         articleListQuery: {
           currentPage: 1,
-          limit: 10
+          limit: 10,
+          sort: 'asc'
         },
         listLoading: true,
         articleList: null,
@@ -88,7 +89,8 @@
     mounted () {
       this.getList({
         limit: this.articleListQuery.limit,
-        currentPage: this.articleListQuery.currentPage
+        currentPage: this.articleListQuery.currentPage,
+        sort: this.articleListQuery.sort
       })
     },
     methods: {
@@ -103,30 +105,29 @@
         this.articleListQuery.limit = val
         this.getList({
           limit: val,
-          currentPage: this.articleListQuery.currentPage
+          currentPage: this.articleListQuery.currentPage,
+          sort: this.articleListQuery.sort
         })
       },
       handleCurrentChange (val) {
         this.articleListQuery.currentPage = val
         this.getList({
           limit: this.articleListQuery.limit,
-          currentPage: val
+          currentPage: val,
+          sort: this.articleListQuery.sort
         })
       },
       sortId () {
         if (this.articleList === null) {
           return
         }
-        if (this.value === 'desc') {
-          this.articleList.sort((articleObj1, articleObj2) => {
-            return articleObj2.id - articleObj1.id
-          })
-        }
-        if (this.value === 'asc') {
-          this.articleList.sort((articleObj1, articleObj2) => {
-            return articleObj1.id - articleObj2.id
-          })
-        }
+        this.articleListQuery.sort = this.value
+        this.articleListQuery.currentPage = 1
+        this.getList({
+          limit: this.articleListQuery.limit,
+          currentPage: this.articleListQuery.currentPage,
+          sort: this.value
+        })
       }
     },
     components: {

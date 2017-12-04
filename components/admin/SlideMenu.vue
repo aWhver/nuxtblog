@@ -65,6 +65,9 @@
 .el-menu-vertical-demo .el-submenu .el-menu {
   background-color: #1f2d3d;
 }
+.nuxt-link-exact-active.nuxt-link-active {
+  color: #6aabef;
+}
 </style>
 <script>
 </script>
