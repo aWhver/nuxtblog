@@ -12,7 +12,7 @@
           <el-button type="primary" icon="el-icon-edit">新增</el-button>
         </div>
       </div>
-      <el-table :data="articleList" v-loading="listLoading" element-loading-text="拼命加载中......" border fit empty-text="暂无数据" style="width: 100%">
+      <el-table :data="articleList" v-loading="listLoading" element-loading-text="小主,我需要时间......" border fit empty-text="暂无数据" style="width: 100%">
         <el-table-column type="index" align="center" label="序号">
           <template scope="scope">
             <span>{{ scope.row.id }}</span>
@@ -41,6 +41,12 @@
         <el-table-column label="标签" align="center" width="90">
           <template scope="scope">
             <el-tag type="success">{{ scope.row.tag }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" align="center" width="160">
+          <template scope="scope">
+            <el-button type="primary" size="small">修改</el-button>
+            <el-button type="warning" size="small" @click="deleteArticle(scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -127,6 +133,25 @@
           limit: this.articleListQuery.limit,
           currentPage: this.articleListQuery.currentPage,
           sort: this.value
+        })
+      },
+      async deleteArticle (articleId) {
+        this.listLoading = true
+        let { data: { status, msg } } = await axios.post('/api/admin/article/delete', {articleId: articleId})
+        let notifyMsg = ['操作失败', '操作成功'][status]
+        let msgType = ['error', 'success'][status]
+        if (status === 1) {
+          this.getList({
+            limit: this.articleListQuery.limit,
+            currentPage: this.articleListQuery.currentPage,
+            sort: this.articleListQuery.sort
+          })
+        }
+        this.listLoading = false
+        this.$notify({
+          title: notifyMsg,
+          message: msg,
+          type: msgType
         })
       }
     },
