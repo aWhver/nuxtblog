@@ -15,6 +15,25 @@ class ArticleList {
       })
     })
   }
+  // 新增文章
+  async addArticle (req, res) {
+    let time = req.body.form['time'].split('.')[0].split('T').join(' ')
+    await sql('INSERT INTO article (id, author, title, description, uId, time, tag) values (0, ?, ?, ?, 7, ?, ?)', [req.body.form['author'], req.body.form['title'], req.body.form['description'], time, req.body.form['tag']], (err, result) => {
+      if (err) {
+        res.send({
+          status: 0,
+          type: 'ARTICLE_ADD_FAIL',
+          msg: '添加文章失败'
+        })
+        return
+      }
+      res.send({
+        status: 1,
+        type: 'ARTICLE_ADD_SUCCESS',
+        msg: '文章添加成功'
+      })
+    })
+  }
   // 删除文章
   deleteArticle (req, res) {
     let articleId = req.body['articleId']
@@ -34,19 +53,31 @@ class ArticleList {
       })
     })
   }
-  // 首页展示8篇文章
+  // 前端首页展示8篇文章
   homeArticle (req, res) {
     sql('SELECT * FROM article order by id DESC limit 0,8', null, (err, result) => {
       if (err) {
-        res.send('请求失败')
+        res.send({
+          status: 0
+        })
+        return
       }
-      res.send({articleList: result})
+      res.send({articleList: result, status: 1})
     })
   }
   // 文章详情
-  checkDetail () {
-    sql('select * from article where id = ?', [req.body['articleId']], (err, result) => {
-      console.log(result)
+  checkDetail (req, res) {
+    sql('select * from article where id = ?', [req.params['articleId']], (err, result) => {
+      if (err) {
+        res.send({
+          status: 0
+        })
+        return
+      }
+      res.send({
+        detail: result,
+        status: 1
+      })
     })
   }
 }

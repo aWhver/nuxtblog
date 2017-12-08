@@ -22,7 +22,7 @@
             <div class="line"></div>
             <p class="desc">{{ value.description }}</p>
             <div class="readAll text-center">
-              <nuxt-link :to="`/article?${value.id}`">阅读全文</nuxt-link>
+              <nuxt-link :to="`/article/${value.id}`">阅读全文</nuxt-link>
             </div>
           </div>
         </div>

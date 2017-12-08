@@ -68,7 +68,8 @@ module.exports = {
    */
   plugins: [
     {src: '~/plugins/element-ui.js', ssr: true},
-    {src: '~/plugins/nuxt-quill-plugin.js', ssr: false}
+    {src: '~/plugins/nuxt-quill-plugin.js', ssr: false},
+    {src: '~/plugins/components.js'}
   ],
   /*
    ** 访问地址

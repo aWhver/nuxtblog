@@ -21,6 +21,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill {
 }
 .main-container {
   margin-left: 180px;
+  padding: 15px;
 }
 .main-container .el-table__body-wrapper {
   overflow: inherit;
@@ -55,4 +56,10 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill {
 }
 .pagination-container .el-pagination button.disabled { background-color: #6aabef; color: #ffffff;}
 .pagination-container .el-pager li.btn-quicknext, .el-pager li.btn-quickprev { color: #ffffff;}
-
+.el-tag {
+  width: 56px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}

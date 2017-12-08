@@ -1,15 +1,11 @@
 <template>
   <div>
-    <SlideMenu></SlideMenu>
+    this is index page
   </div>
 </template>
 <script>
-  import SlideMenu from '~/components/admin/SlideMenu'
   export default {
-    layout: 'login',
-    components: {
-      SlideMenu
-    }
+    layout: 'login'
   }
 </script>
 <style>
