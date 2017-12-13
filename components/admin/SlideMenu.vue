@@ -1,35 +1,36 @@
 <template>
-  <el-container>
-    <el-menu
-      default-active="admin/info"
-      class="el-menu-vertical-demo">
-      <el-menu-item index="/admin/info">
-        <nuxt-link to="/admin/info">
-          <i class="el-icon-location"></i>
-          <!--<svg-icon></svg-icon>-->
-          <span slot="title">个人信息</span>
-        </nuxt-link>
-      </el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">
-          <i class="el-icon-tickets"></i>
-          <span slot="title">文章管理</span>
-        </template>
-        <el-menu-item index="/admin/article">
-          <nuxt-link to="/admin/article">
-            <i class="el-icon-setting"></i>
-            <span slot="title">文章列表</span>
+  <div class="sidebar">
+    <el-container>
+      <el-menu
+        default-active="/admin"
+        class="el-menu-vertical-demo">
+        <el-menu-item index="/admin">
+          <nuxt-link to="/admin" @click.stop="console.log(1)">
+            <svg-icon :icon-class="`shouye`"></svg-icon>
+            <span slot="title">首页</span>
           </nuxt-link>
         </el-menu-item>
-        <el-menu-item index="/admin/patchArticle">
-          <nuxt-link to="/admin/patchArticle">
-            <i class="el-icon-location"></i>
-            <span slot="title">新增文章</span>
-          </nuxt-link>
-        </el-menu-item>
-      </el-submenu>
-    </el-menu>
-  </el-container>
+        <el-submenu index="2">
+          <template slot="title">
+            <svg-icon :icon-class="`wenzhangguanli`"></svg-icon>
+            <span slot="title">文章管理</span>
+          </template>
+          <el-menu-item index="/admin/article">
+            <nuxt-link to="/admin/article">
+              <svg-icon :icon-class="`wenzhangliebiao`"></svg-icon>
+              <span slot="title">文章列表</span>
+            </nuxt-link>
+          </el-menu-item>
+          <el-menu-item index="/admin/patchArticle">
+            <nuxt-link to="/admin/patchArticle">
+              <svg-icon :icon-class="`bianjiwenzhang`"></svg-icon>
+              <span slot="title">新增文章</span>
+            </nuxt-link>
+          </el-menu-item>
+        </el-submenu>
+      </el-menu>
+    </el-container>
+  </div>
 </template>
 <style>
 .el-menu-vertical-demo {
@@ -37,11 +38,11 @@
   height: 100%;
   left: 0;
   width: 180px;
-  background: #324751;
+  background: #304156;
   color: #fff;
 }
 .el-menu-item.is-active {
-  background-color: #324751;
+  background-color: #304156;
 }
 .el-menu-item:focus, .el-menu-item:hover {
   background-color: #48576a;
@@ -52,14 +53,14 @@
 .el-submenu__title:hover {
   background-color: #48576a;
 }
-.el-submenu .el-menu-item {
+.el-submenu .el-menu-item span{
   min-width: 180px !important;
   color: #bfcbd9;
 }
-.el-menu-item {
+.el-menu-item span{
   color: #bfcbd9;
 }
-.el-menu-item.is-active {
+.el-menu-item.is-active span{
   color: #409eff !important;
 }
 .el-menu-vertical-demo .el-submenu .el-menu {

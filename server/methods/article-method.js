@@ -15,23 +15,46 @@ class ArticleList {
       })
     })
   }
-  // 新增文章
-  async addArticle (req, res) {
+  /*
+  ** 新增文章或更新文章
+  * 根据传过来的id查询,有则更新，无则新增
+  */
+  async patchArticle (req, res) {
     let time = req.body.form['time'].split('.')[0].split('T').join(' ')
-    await sql('INSERT INTO article (id, author, title, description, uId, time, tag) values (0, ?, ?, ?, 7, ?, ?)', [req.body.form['author'], req.body.form['title'], req.body.form['description'], time, req.body.form['tag']], (err, result) => {
-      if (err) {
-        res.send({
-          status: 0,
-          type: 'ARTICLE_ADD_FAIL',
-          msg: '添加文章失败'
+    await sql('SELECT * FROM article where id = ?', [req.body.form['id']], (err, result) => {
+      if (result.length === 0) {
+        sql('INSERT INTO article (id, author, title, description, uId, time, tag) values (0, ?, ?, ?, 7, ?, ?)', [req.body.form['author'], req.body.form['title'], req.body.form['description'], time, req.body.form['tag']], (err, result) => {
+          if (err) {
+            res.send({
+              status: 0,
+              type: 'ARTICLE_ADD_FAIL',
+              msg: '添加文章失败'
+            })
+            return
+          }
+          res.send({
+            status: 1,
+            type: 'ARTICLE_ADD_SUCCESS',
+            msg: '文章添加成功'
+          })
         })
-        return
+      } else {
+        sql(`UPDATE article set author = ?, title = ?, description = ?, time = ?, tag = ? WHERE id = ${[req.body.form['id']]}`, [req.body.form['author'], req.body.form['title'], req.body.form['description'], time, req.body.form['tag']], (err, result) => {
+          if (err) {
+            res.send({
+              status: 0,
+              type: 'ARTICLE_PATCH_FAIL',
+              msg: '添加更新失败'
+            })
+            return
+          }
+          res.send({
+            status: 1,
+            type: 'ARTICLE_PATCH_SUCCESS',
+            msg: '文章更新成功'
+          })
+        })
       }
-      res.send({
-        status: 1,
-        type: 'ARTICLE_ADD_SUCCESS',
-        msg: '文章添加成功'
-      })
     })
   }
   // 删除文章

@@ -22,6 +22,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill {
 .main-container {
   margin-left: 180px;
   padding: 15px;
+  transition: margin-left linear 0.4s;
 }
 .main-container .el-table__body-wrapper {
   overflow: inherit;
@@ -54,6 +55,10 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill {
   border-radius: 5px;
   padding-left: 6px;
 }
+.el-submenu .el-menu-item {
+  max-width: 180px;
+  min-width: 180px !important;
+}
 .pagination-container .el-pagination button.disabled { background-color: #6aabef; color: #ffffff;}
 .pagination-container .el-pager li.btn-quicknext, .el-pager li.btn-quickprev { color: #ffffff;}
 .el-tag {
@@ -63,3 +68,14 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill {
   white-space: nowrap;
   vertical-align: middle;
 }
+.menu-horizontal {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+}
+ul.el-menu {transition: width linear 0.4s;}
+#__nuxt .hideSidebar ul.el-menu {
+  width: 36px;
+}
+#__nuxt .hideSidebar ul li span ,#__nuxt .hideSidebar .el-submenu__icon-arrow.el-icon-arrow-down{display: none;}
+#__nuxt .hideSidebar .el-submenu .el-menu {display: none !important;}
+#__nuxt .hideSidebar .el-menu-item ,#__nuxt .hideSidebar .el-submenu__title {padding-left: 10px !important;}

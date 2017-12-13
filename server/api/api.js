@@ -9,7 +9,7 @@ router.post('/login', Login.login)
 router.post('/register', Register.register)
 router.post('/admin/article', ArticleList.adminArticleList)
 router.post('/admin/article/delete', ArticleList.deleteArticle)
-router.post('/admin/article/add', ArticleList.addArticle)
+router.post('/admin/article/patch', ArticleList.patchArticle)
 router.post('/home', ArticleList.homeArticle)
 router.post('/article/:articleId', ArticleList.checkDetail)
 

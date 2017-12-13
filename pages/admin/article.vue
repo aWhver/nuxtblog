@@ -11,7 +11,7 @@
       </div>
     </div>
     <el-table :data="articleList" v-loading="listLoading" element-loading-text="小主,我需要时间......" border fit empty-text="暂无数据" style="width: 100%">
-      <el-table-column type="index" align="center" label="序号">
+      <el-table-column align="center" label="序号">
         <template scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
@@ -45,7 +45,7 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="160">
         <template scope="scope">
-          <el-button type="primary" size="small">修改</el-button>
+          <el-button type="primary" size="small" @click="patchArticle(scope.row)">修改</el-button>
           <el-button type="warning" size="small" @click="deleteArticle(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
@@ -98,7 +98,8 @@
           author: '',
           tag: '',
           time: '',
-          description: ''
+          description: '',
+          id: ''
         },
         dialogVisible: false,
         articleListQuery: {
@@ -185,7 +186,7 @@
         })
       },
       async addArticle () {
-        let { data: { status, msg } } = await axios.post('/api/admin/article/add', { form: this.form })
+        let { data: { status, msg } } = await axios.post('/api/admin/article/patch', { form: this.form })
         let notifyMsg = ['操作失败', '操作成功'][status]
         let msgType = ['error', 'success'][status]
         this.$notify({
@@ -193,6 +194,17 @@
           message: msg,
           type: msgType
         })
+      },
+      patchArticle (detail) {
+        this.dialogVisible = true
+        this.form = {
+          title: detail.title,
+          author: detail.author,
+          tag: detail.tag,
+          time: detail.time,
+          description: detail.description,
+          id: detail.id
+        }
       }
     },
     components: {

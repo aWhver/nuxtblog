@@ -48,20 +48,7 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    },
-    /*
-     ** loader处理
-     */
-    loaders: [
-      {
-        test: /\.svg$/,
-        loader: 'svg-sprite-loader',
-        include: [`${process.cwd()}/assets/icons/svg`],
-        options: {
-          symbolId: 'icon-[name]'
-        }
-      }
-    ]
+    }
   },
   /*
    ** 插件引入
@@ -69,12 +56,13 @@ module.exports = {
   plugins: [
     {src: '~/plugins/element-ui.js', ssr: true},
     {src: '~/plugins/nuxt-quill-plugin.js', ssr: false},
-    {src: '~/plugins/components.js'}
+    {src: '~/plugins/components.js'},
+    {src: '~/plugins/svg-icon.js'}
   ],
   /*
-   ** 访问地址
+  ** 模块扩展
    */
-  env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
-  }
+  modules: [
+    '~/modules/svg-sprite-loader.js'
+  ]
 }
