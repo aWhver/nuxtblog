@@ -1,11 +1,11 @@
-const {Router}  = require('express')
+const {Router} = require('express')
 const bodyParser = require('body-parser')
 
 const router = Router()
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 
-router.use('/',require('./api'))
+router.use('/', require('./api'))
 
 /*
 router.post('/checkLogin', (req, res) => {
@@ -20,4 +20,4 @@ router.post('/checkLogin', (req, res) => {
   }
 }) */
 
-module.exports =  router
+module.exports = router

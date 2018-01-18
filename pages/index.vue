@@ -1,6 +1,6 @@
 <template>
   <section>
-    
+
     <div class="banner-content" ref="bannerContent">
       <div class="container">
         <div class="motto text-center">
@@ -18,11 +18,11 @@
       <div class="container">
         <div class="row">
           <div class="col-md-3 col-sm-6 col-xs-12" v-for="value in list">
-            <h4 class="text-center">vue</h4>
+            <h4 class="text-center">{{ value.tag }}</h4>
             <div class="line"></div>
-            <p class="desc">Vue.js (读音 /vjuː/，类似于 view) 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层，它不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与单文件组件和 Vue 生态系统支持的库结合使用时，Vue 也完全能够为复杂的单页应用程序提供驱动。如果你是有经验的前端开发者，想知道 Vue.js 与其它库/框架的区别，查看对比其它框架</p>
+            <p class="desc">{{ value.description }}</p>
             <div class="readAll text-center">
-              <nuxt-link :to="'/article?45'">阅读全文</nuxt-link>
+              <nuxt-link :to="`/article/${value.id}`">阅读全文</nuxt-link>
             </div>
           </div>
         </div>
@@ -32,10 +32,11 @@
 </template>
 
 <script>
+  import axios from '~/plugins/axios'
   export default {
     data () {
       return {
-        list: [1, 2, 3, 4, 5, 6],
+        list: [],
         scrollTop: 0
       }
     },
@@ -52,9 +53,14 @@
             clearInterval(timer)
           }
         }, 30)
+      },
+      async getArticleList () {
+        let { data: { articleList } } = await axios.post('/api/home')
+        this.list = articleList
       }
     },
     mounted () {
+      this.getArticleList()
       let goArticleTop = this.$refs.bannerContent.offsetHeight
       this.$refs.goArticle.onclick = () => {
         this.scrollAnimation(goArticleTop)
@@ -110,7 +116,7 @@ div.motto em {
 }
 #article p.desc {
   line-height: 24px;
-  height: 72px;  
+  height: 72px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
