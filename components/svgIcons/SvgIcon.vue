@@ -1,6 +1,6 @@
 <template>
   <svg class="svg-icon" aria-hidden="true">
-    <use xlink:href="#icon-wenzhangliebiao"></use>
+    <use xlink:href="#bianjiwenzhang" />
   </svg>
 </template>
 <style>
@@ -13,7 +13,7 @@
   }
 </style>
 <script>
-  import '~/assets/icons/svg/wenzhangliebiao.svg'
+  import '~/assets/icons/svg/bianjiwenzhang.svg'
   export default {
     name: 'svg-icon'
   }
